@@ -4,34 +4,6 @@ include .env
 
 .EXPORT_ALL_VARIABLES:
 
-.PHONY: setup-airflow-variables
-setup-airflow-variables:
-	@echo "Running setup_airflow_variables.sh on $(AIRFLOW_HOST)..."
-	ssh -i $(PRIVATE_KEY_PATH) \
-		-o StrictHostKeyChecking=no \
-		-o UserKnownHostsFile=/dev/null \
-		$(AIRFLOW_VM_USER)@$(AIRFLOW_HOST) \
-		'bash /home/ubuntu/setup_airflow_variables.sh'
-	@echo "Script execution completed"
-
-.PHONY: push-airflow-variables
-push-airflow-variables:
-	@echo "Pushing variables.json to Airflow API..."
-	curl -X POST -H "Content-Type: application/json" \
-		-u $(AIRFLOW_ADMIN_USER):$(AIRFLOW_ADMIN_PASSWORD) \
-		--data-binary @variables.json \
-		https://$(AIRFLOW_URL)/api/v1/variables
-	@echo "Variables pushed successfully"
-
-.PHONY: upload-dags-to-airflow
-upload-dags-to-airflow:
-	@echo "Uploading dags to $(AIRFLOW_HOST)..."
-	scp -i $(PRIVATE_KEY_PATH) \
-		-o StrictHostKeyChecking=no \
-		-o UserKnownHostsFile=/dev/null \
-		-r dags/*.py $(AIRFLOW_VM_USER)@$(AIRFLOW_HOST):/home/airflow/dags/
-	@echo "Dags uploaded successfully"
-
 .PHONY: upload-dags-to-bucket
 upload-dags-to-bucket:
 	@echo "Uploading dags to $(S3_BUCKET_NAME)..."

@@ -115,7 +115,7 @@ with DAG(
         task_id="dp-cluster-create-task",
         folder_id=YC_FOLDER_ID,
         cluster_name=f"tmp-dp-{uuid.uuid4()}",
-        cluster_description="YC Temp Spark Cluster",
+        cluster_description="YC Spark Cluster",
         subnet_id=YC_SUBNET_ID,
         s3_bucket=S3_DP_LOGS_BUCKET,
         service_account_id=DP_SA_ID,
