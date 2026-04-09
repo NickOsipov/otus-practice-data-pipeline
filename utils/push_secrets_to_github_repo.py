@@ -10,12 +10,12 @@ from nacl import public
 from loguru import logger
 
 # Загрузить переменные из .env
-secrets = dotenv_values(".env")
-secrets_blacklist = ["GITHUB_TOKEN", "GITHUB_REPO", "PRIVATE_KEY_PATH"]
+SECRETS = dotenv_values(".env")
+SECRETS_BLACKLIST = ["GITHUB_TOKEN", "GITHUB_REPO", "PRIVATE_KEY_PATH"]
 
 # GitHub API токен и репозиторий
-GITHUB_TOKEN = secrets.get("GITHUB_TOKEN")  # Убедитесь, что токен есть в .env
-GITHUB_REPO = secrets.get("GITHUB_REPO")  # Убедитесь, что имя репозитория есть в .env
+GITHUB_TOKEN = SECRETS.get("GITHUB_TOKEN")  # Убедитесь, что токен есть в .env
+GITHUB_REPO = SECRETS.get("GITHUB_REPO")  # Убедитесь, что имя репозитория есть в .env
 
 if not GITHUB_TOKEN or not GITHUB_REPO:
     raise ValueError("GITHUB_TOKEN и GITHUB_REPO должны быть определены в .env")
@@ -73,8 +73,8 @@ def main() -> None:
     logger.info("Starting to add secrets to GitHub repository")
 
     # Добавление всех переменных из .env, кроме черного списка
-    for key, value in secrets.items():
-        if key in secrets_blacklist:
+    for key, value in SECRETS.items():
+        if key in SECRETS_BLACKLIST:
             logger.debug(f"Skipping blacklisted secret: {key}")
             continue
 
