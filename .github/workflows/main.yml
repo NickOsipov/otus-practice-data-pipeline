@@ -20,7 +20,7 @@ env:
 
 jobs:
   sync-dags:
-    name: Sync dags to S3
+    name: Sync DAGs to S3
     runs-on: ubuntu-latest
     steps:
       # загрузка репозитория в runner

@@ -115,13 +115,13 @@ with DAG(
         task_id="dp-cluster-create-task",
         folder_id=YC_FOLDER_ID,
         cluster_name=f"tmp-dp-{uuid.uuid4()}",
-        cluster_description="YC Spark Cluster for Otus Practice",
+        cluster_description="YDP Cluster for OTUS Practice",
         subnet_id=YC_SUBNET_ID,
         s3_bucket=S3_DP_LOGS_BUCKET,
         service_account_id=DP_SA_ID,
         ssh_public_keys=YC_SSH_PUBLIC_KEY,
         zone=YC_ZONE,
-        cluster_image_version="2.0",
+        cluster_image_version="2.1",
 
         # masternode
         masternode_resource_preset="s3-c2-m8",
